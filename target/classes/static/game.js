@@ -18,6 +18,33 @@ let isHardMode = false;
 
 //modo solo
 let isSinglePlayerMode = false;
+//número de partidas
+let num_partidas = 0;
+console.log(num_partidas);
+//Variable que guarda el botón pulsado de las partidas
+let boton_partida;
+let boton_uno = document.getElementById("una_partida");
+let boton_tres = document.getElementById("tres_partidas");
+let boton_cinco = document.getElementById("cinco_partidas");
+
+boton_uno.addEventListener("click", function(){
+  boton_uno.innerText
+  boton_partida = boton_uno.innerText;
+  console.log(boton_partida)
+})
+boton_tres.addEventListener("click", function(){
+  boton_tres.innerText
+  boton_partida = boton_tres.innerText;
+  console.log(boton_partida)
+})
+boton_cinco.addEventListener("click", function(){
+  boton_cinco.innerText
+  boton_partida = boton_cinco.innerText;
+  console.log(boton_partida)
+})
+
+//variable etiqueta
+let winner_message = document.getElementById("etiqueta")
 
 
 
@@ -288,9 +315,29 @@ const winner = cells[winningCombination[0]].textContent;
 const winnerName = winner === "X" ? localStorage.getItem("player1Name") : localStorage.getItem("player2Name");
 
 setTimeout(() => {
-  alert(`${winnerName} ha ganado!`);
+  //alert(`${winnerName} ha ganado!`);
+  winner_message.innerHTML= "Ha ganado" + winnerName;
+  winner_message.style.visibility="visible";
+setTimeout(() => {
+  winner_message.innerHTML= "" ;
+winner_message.style.visibility="hidden";
+}, 2000);
 
+
+  num_partidas ++;
+console.log(num_partidas);
+/*location.reload(); Hay que eliminar esta función reservada porque no queremos que se recargue la página
+*/
+if (num_partidas == 3 && boton_partida == "3 partidas") {
+  location.reload();
+} else if(num_partidas == 1 && boton_partida == "1 partida") {
+ setTimeout(() => {
+  location.reload(); 
+ }, 2000);
+}else if(num_partidas == 5 && boton_partida == "5 partidas"){
 location.reload();
+}
+initGame()
 
 
 },500);
@@ -310,10 +357,10 @@ isDraw=false;
 
 if(isDraw){
 setTimeout(()=>{
-alert("Empate");
+alert("Habéis empatado");
 
-location.reload();
-
+/*location.reload();*/
+initGame()
 
 },500);
 }
