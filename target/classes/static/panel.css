@@ -278,5 +278,25 @@ td:hover {
         width: 250px;
         height: 100px;
     }
-
+    #botones_partidas button{
+        padding: 20px;
+        border-radius: 10px;
+        border:none;
+        border:solid 2px teal;
+        font-size: 20px;
+    }
+    #botones_partidas button:hover{
+        background-color: teal;
+        color:white;
+    }
+    #etiqueta{
+        padding: 100px;
+        background-color: #f0f1f2;
+        border-radius:10px;
+        box-shadow: 0 0 10px black;
+        position: fixed;
+        left:37%;
+        bottom:40%;
+        visibility: hidden;
+    }
 
