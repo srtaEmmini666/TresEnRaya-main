@@ -1,0 +1,99 @@
+
+*{
+  margin: 0;
+  padding: 0;
+  /* overflow: hidden; */
+}
+
+  .container-without-panel{
+    font-family: monospace, 'Courier New', Courier;
+    font-size: 30px;
+  }
+
+
+table {
+    border-collapse: collapse;
+    margin: auto;
+    margin-top: 50px;
+    display: none;
+  }
+  
+  td {
+    border: 2px solid black;
+    width: 100px; 
+    height: 100px; 
+    text-align: center;
+    font-size: 30px;
+    cursor: pointer;
+  }
+
+  td.dark{
+    border: 2px solid white;
+    width: 100px; 
+    height: 100px; 
+    text-align: center;
+    font-size: 30px;
+    cursor: pointer;
+  }
+
+  /* .my-shadow:hover {
+    background-color: rgba(34,34,34, 0.1);
+    box-shadow: 0 0 5px white;
+    background-color: red;
+  } */
+  
+  
+  td.winner {
+    background-color: #ffd700;
+    color: #fff;
+  }
+
+  .player1-turn {
+    border-bottom: 5px solid teal;
+    width: 200px;
+    box-shadow: 0 0 2px white;
+
+  }
+  
+  .player2-turn {
+    border-bottom: 5px solid teal;
+    width: 200px;
+    box-shadow: 0 0 2px white;
+
+  }
+
+  #players {
+    display: flex;
+    justify-content: space-between;
+     width: 650px; /*distancia entre nombre jugadores */
+    margin: auto;
+  }
+  
+  #player1, #player2 {
+    margin: 0;
+    width: 120px; /* Ajustar según el tamaño deseado */
+    text-align: center;
+  }
+
+
+  #name-inputs{
+    /* border: solid 1px red; */
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin: 0 auto;
+  }
+
+  .container-buttons{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    max-width: 100px;
+    margin: 0 auto;
+  }
+
+  .show-cronometro{
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+  }

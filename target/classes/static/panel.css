@@ -1,0 +1,282 @@
+  
+  body{
+    background-color: #ccefe3;
+    
+  }
+
+  body.dark{
+    background-color:  #282c34;
+    color: white;
+  }
+
+  .container-without-panel{
+    font-family: monospace, 'Courier New', Courier;
+    font-size: 30px;
+  }
+
+.menu a, p{
+    padding: 2rem;
+    width: inherit;
+    display: block;
+    font-size: 1.3rem;
+    text-decoration: none;
+    color: white;
+    transition: all 0.25s ease-in-out; /*transici'on al mostrar las secciones*/
+    }
+
+    .menu p{
+        color: #ccefe3;
+        box-shadow: 0 0 1px #ccc;
+    }
+    
+    .menu a:hover{
+    font-weight: bold;
+    color: black;
+    background-color: #25a495;
+    font-size: 1rem;
+    }
+    
+    .boton{
+        z-index: 999;
+        position: fixed;
+    }
+
+    .panel{
+    position: fixed;
+    z-index: 998;
+    background-color: teal;
+    top: 0px;
+    max-width: 20%;
+    min-width: 250px;
+    height: 100%;
+    transform: translate(-110%,0%);/*hace que el menu aparezca de derecha a izq*/
+    transition: transform .3s ease;/*hace que lo haga con una transicion, suavemente*/
+    }
+
+    .panel.dark{
+        position: fixed;
+        z-index: 998;
+        background-color: rgb(73, 73, 96);
+        top: 0px;
+        max-width: 20%;
+        min-width: 250px;
+        height: 100%;
+        transform: translate(-110%,0%);/*hace que el menu aparezca de arriba hacia abajo*/
+        transition: transform .3s ease;/*hace que lo haga con una transicion, suavemente*/
+        }
+
+    
+    .panel.is-active{
+        transform: translate(0,0);
+    }
+
+
+.boton{
+    position: fixed;
+    background: url(btnBlanco.png);
+    width: 50px;
+    height: 50px;
+    background-size: cover;
+    border: none;
+    z-index: 1000;
+    top: 7px;
+    transition: all .2s;
+}
+
+
+.boton:hover{
+    position: fixed;
+    background: url(btnBlanco.png);
+    width: 60px;
+    height: 60px;
+    background-size: cover;
+    border: none;
+    z-index: 1000;
+    top: 0px;
+    cursor: pointer;
+    transition: all .2s;
+}
+
+
+
+.btns{
+    border: none;
+    border-radius: 5px;
+    background-color: #282c34;
+    color: white;
+    padding: 5px;
+    /* transition: all .1s; */
+}
+
+.btns:hover{
+    border: none;
+    border-radius: 5px;
+    background-color: #282c34;
+    color: white;
+    padding: 5px;
+    box-shadow: 0 0 5px white;
+    /* transition: all .1s; */
+}
+
+.btns.dark{
+    border: none;
+    border-radius: 5px;
+    background-color: #ccefe3;
+    color: black;
+    padding: 5px;
+    /* transition: all .1s; */
+}
+
+.btns.dark:hover{
+    border: none;
+    border-radius: 5px;
+    background-color: #ccefe3;
+    color: black;
+    padding: 5px;
+    /* transition: all .1s; */
+}
+
+#name-inputs{
+    /* border: solid 1px red; */
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin: 0 auto;
+  }
+
+/* css inputs introducir nombres */
+.inputs-text{
+border: none;
+padding: 10px;
+width: 250px;
+border-radius: 3px;
+
+}
+
+
+#start-game-button{
+    padding: 10px;
+    border: none;
+    background-color: teal;
+    color: white;
+    border-radius: 2px;
+    transition: all .1s ease-in;
+
+}
+
+#start-game-button:hover{
+    padding: 10px;
+    border: none;
+    background-color: teal;
+    color: white;
+    border-radius: 2px;
+    box-shadow: 0 0 7px white;
+    padding: 15px;
+    transition: all .1s ease-in;
+}
+
+/* canvas */
+#board{
+    display: flex;
+    justify-content: space-between;
+     width: 550px; /*distancia entre nombre jugadores */
+     height: 550px;
+    margin: 0 auto;
+    margin-top: 0;
+}
+
+.container-buttons{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    max-width: 100px;
+    margin: 0 auto;
+  }
+/* 
+*{
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+} */
+
+
+.container-names{
+    display: flex;
+    justify-content: space-between;
+     width: 650px; /*distancia entre nombre jugadores */
+    margin: auto;
+}
+
+
+#name1{
+    background-color: orange;
+}
+
+#name2{
+    background-color: lime;
+}
+
+td:hover {
+    background-color: rgba(34,34,34, 0.1);
+    box-shadow: 0 0 15px white;
+  }
+
+
+  .name-game{
+    white-space: nowrap;
+    display: block;
+    animation: escribir 2s 1;
+    overflow: hidden;
+    width: 14ch;
+    text-shadow: 0 0 10px black;
+    font-size: 50px;
+  }
+
+  .name-game.dark{
+    white-space: nowrap;
+    display: block;
+    animation: escribir 2s 1;
+    overflow: hidden;
+    width: 14ch;
+    text-shadow: 0 0 15px white;
+    font-size: 50px;
+  }
+
+    @keyframes escribir {
+        from{width: 0%}
+    }
+
+    #board-container{
+        display: flex;
+    }
+
+    #board-container img{
+        /* display: flex; */
+        visibility: hidden;
+        animation: animar 2s 2;
+        overflow: hidden;
+    }
+
+    @keyframes animar {
+    from{height: 0;}
+    30%, 50%{background: lime;}
+    40%, 70%{background: orange;}
+    50%, 70%{background: black;}
+    60%, 70%{background: red;}
+    70%, 80%{background: yellow;}
+    100%{background: violet;}
+
+    }
+
+
+    #img1{
+        width: 200px;
+        height: 100px;
+    }
+
+    #img2{
+        width: 250px;
+        height: 100px;
+    }
+
+

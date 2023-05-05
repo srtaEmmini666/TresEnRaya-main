@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="panel.css">
+</head>
+<body>
+    <div class="panel-container">
+        <aside class="panel">
+            <br><br><br><br>
+            <div class="container-buttons">
+                <button class="btns" id="btnDarkMode">Modo Oscuro</button>
+                <br><br>
+                <button  class="btns" id="hard-mode-button">Modo difícil</button>
+            </div>
+<br>
+            <nav class="menu">
+                <a href="">Historial de partidas</a>
+                <p href="">Otros Juegos</p>
+                <a href="index.html">Tres en raya</a>
+                <a href="">Piedra papel o tijera</a>
+                <a href="">Memoria</a>
+
+            </nav>
+            </aside><br>
+            <button type="button" class="boton"></button>
+    </div>
+    <!-- <h1>Snake</h1> -->
+ <div class="container-without-panel">
+    <div id="name-inputs">
+        <label for="player1-name">Jugador 1:</label>
+        <input  class="inputs-text" type="text" id="player1-name" placeholder="Eustaquia.." >
+        <br>
+        <label for="player2-name">Jugador 2:</label>
+        <input  class="inputs-text" type="text" id="player2-name" placeholder="Clodomiro.." >
+        <br>
+        <button id="start-game-button">PLAY!</button>
+
+        <p class="name-game" >Serpientita --</p>
+
+      </div>
+      <br>
+
+<div class="container-names">    <span id="name1"></span> <span id="name2"></span>    </div>   
+ 
+</div> 
+
+<div id="board-container">
+    <img id="img1" class="botones" src="letras.png" alt="letras">
+    <canvas id="board"></canvas>
+  <img id="img2" class="botones" src="flechas.png"  alt="flechas">
+  
+</div>
+
+    <script src="snake.js"></script>
+    <script src="panel.js"></script>
+    <script src="modoOscuro.js"></script>
+</body>
+</html>
+
+

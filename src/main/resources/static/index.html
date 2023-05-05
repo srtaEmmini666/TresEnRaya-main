@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="game.css">
+    <link rel="stylesheet" href="panel.css">
+    <title>Document</title>
+</head>
+<body class="">
+    <!-- panelcito -->
+    <div class="panel-container">
+        <aside class="panel">
+            <br><br><br><br>
+            <div class="container-buttons">
+                <button class="btns" id="btnDarkMode">Modo Oscuro</button>
+                <br><br>
+                <button  class="btns" id="hard-mode-button">Modo difícil</button>
+                <br><br>
+                <button class="btns" id="single-player-mode-button">Modo Solo</button>
+            </div>
+<br>
+            <nav class="menu">
+                <a href="">Historial de partidas</a>
+                <p href="">Otros Juegos</p>
+                <a href="snake.html">Serpientita</a>
+                <a href="">Piedra papel o tijera</a>
+                <a href="">Memoria</a>
+
+
+            </nav>
+          </aside><br>
+          <button type="button" class="boton"></button>
+    </div>
+
+<div class="container-without-panel">
+    
+    <div id="name-inputs">
+        <label for="player1-name">Jugador 1:</label>
+        <input  class="inputs-text" type="text" id="player1-name" placeholder="Eustaquia.." required>
+        <br>
+        <label for="player2-name">Jugador 2:</label>
+        <input  class="inputs-text" type="text" id="player2-name" placeholder="Clodomiro.." required>
+        <br>
+        <button id="start-game-button">PLAY!</button>
+      
+        <p class="name-game" >Tres En Raya #</p>
+
+
+    
+    </div>
+
+
+      <div class="show-cronometro">
+        <div id="turn-timer"></div>
+      </div>
+
+      
+      <div id="players">
+        <div id="player1"></div>
+        <div id="player2"></div>
+      </div>
+      
+    <table>
+        <tr>
+            <td class="my-shadow" id="0"></td>
+            <td id="1"></td>
+            <td id="2"></td>
+        </tr>
+        <tr>
+            <td id="3"></td>
+            <td id="4"></td>
+            <td id="5"></td>
+        </tr>
+        <tr>
+            <td id="6"></td>
+            <td id="7"></td>
+            <td id="8"></td>
+        </tr>
+    </table>
+</div>
+    
+    </body>
+    <script src="game.js"></script>
+    <script src="panel.js"></script>
+    <script src="modoOscuro.js"></script>
+</html>
