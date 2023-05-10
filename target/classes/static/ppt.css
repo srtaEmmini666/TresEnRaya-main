@@ -1,0 +1,149 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    visibility: hidden;
+}
+
+.respuestas-container {
+    display: flex;
+}
+
+.container-botones {
+    display: flex;
+}
+
+
+
+.respuestas-container img{
+width: 200px;
+height: 200px;
+}
+
+.reiniciar {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+
+
+#container-names{
+    display: flex;
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+
+#player1 {
+    margin-right: 100px;
+  }
+
+  #piedra {
+    background-image: url("piedra.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    border: none;
+    width: 100px;
+    height: 100px;
+    margin-left: 10px;
+    border-radius: 10px;
+  }
+
+  #papel {
+    background-image: url("papel.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    border: none;
+    width: 100px;
+    height: 100px;
+    margin-left: 10px;
+    border-radius: 10px;
+  }
+
+  #tijera {
+    background-image: url("tijera.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    border: none;
+    width: 100px;
+    height: 100px;
+    margin-left: 10px;
+    border-radius: 10px;
+  }
+
+
+
+  #piedra { /*esto es para el hover, sin ello se aplica el hover a toda la pantalla y no solo al bot'on*/
+    position: relative;
+  }
+  
+  #piedra:hover::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+  }
+
+
+  #papel {
+    position: relative;
+  }
+  
+  #papel:hover::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+  }
+
+
+  #tijera {
+    position: relative;
+  }
+  
+  #tijera:hover::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+  }
+
+#resultado{
+    text-shadow: 0 0 10px black;
+    font-size: 30px;
+}
+
+.reiniciar button{
+    background-color: teal;
+    border-radius: 5px;
+    border: none;
+    padding: 10px;
+    color: white;
+    transition: all .1s ease;
+
+}
+
+.reiniciar button:hover{
+    background-color: teal;
+    border-radius: 5px;
+    border: none;
+    padding: 15px;
+    color: white;
+    transition: all .1s ease;
+    box-shadow: 0 0 5px black;
+}
+
+
+

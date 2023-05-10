@@ -15,9 +15,9 @@ function modoOscuro() {
     body.classList.add('dark');
     panel.classList.add('dark');
     buttonDark.classList.add('dark');
+    singlePlayerModeButton.classList.add('dark');
     btnHardMode.classList.add('dark');
     nameGame.classList.add('dark');
-    singlePlayerModeButton.classList.add('dark');
 
     td.forEach(element => {
       element.classList.add('dark');

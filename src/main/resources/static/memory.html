@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title><link rel="stylesheet" href="memory.css">
+    <link rel="stylesheet" href="panelExclusive.css">
+<!-- <link rel="stylesheet" href="dinero.css"> -->
+</head>
+<body class="">
+    <div class="panel-container">
+        <aside class="panel">
+            <br><br><br><br>
+            <div class="container-buttons">
+                <button class="btns" id="btnDarkMode">Modo Oscuro</button>
+                <br><br>
+                <!-- <button  class="btns" id="hard-mode-button">Modo difícil</button> -->
+                <button class="btns" id="single-player-mode-button">Modo Solo</button>
+
+            </div>
+<br>
+            <nav class="menu">
+                <a href="data.html">Historial de partidas</a>
+                <p href="">Otros Juegos</p>
+                <a href="index.html">Tres en raya</a>
+                <a href="snake.html">Serpientita</a>
+                <a href="ppt.html">Piedra papel o tijera</a>
+                <!-- <a href="">Memoria</a> -->
+
+            </nav>
+            </aside><br>
+            <button type="button" class="boton"></button>
+    </div>
+
+
+
+    <div class="container-without-panel">
+        <div id="name-inputs">
+            <label for="player1-name">Jugador 1:</label>
+            <input  class="inputs-text" type="text" id="player1-name" placeholder="Eustaquia.." >
+            <br>
+            <label for="player2-name">Jugador 2:</label>
+            <input  class="inputs-text" type="text" id="player2-name" placeholder="Clodomiro.." >
+            <br>
+            <button id="start-game-button">PLAY!</button>
+    
+            <p class="name-game" >Memoria --</p>
+    
+          </div>
+          <br>
+    
+    <div class="container-names">   <span id="puntuacion-jugador-1"></span> <span class="turno" id="name1"></span>   <span id="puntuacion-jugador-2"></span> <span id="name2"></span>    </div>   
+     
+    </div> 
+
+<div id="board-container">
+    <div id="container">
+        <!-- <h1> Memoria </h1> -->
+         <span id="show" style="font-size: 30px; position: absolute; left: 120%; top: 40%; white-space: nowrap;"></span> 
+       <div id="content">
+        <div id="grid">
+        </div>
+        <button id="restart"><b>Restart</b></button>
+        
+       <br>
+       <span style="color: black; font-size: 30px;" id="mensaje-final"></span>
+      <div id="show2" >500$ de monopoly</div>
+      <img src="fotos/foto1.jpg" alt="" id="ahri">
+    </div>
+    </div>
+</div>
+<p id="hard-mode-button"></p> <!-- esto no tiene funcionalidad, solo es para que no me salga error el modo oscuro -->
+    <script src="memory.js"></script>
+    <script src="panel.js"></script>
+    <script src="modoOscuro.js"></script>
+    <!-- <script src="dinero.js"></script> -->
+
+</body>
+</html>
+<!-- l'ogica para que en caso de empate, salga empate (aunque esto no deber'ia ser necesario con las tarjetas) -->
+
+<!-- if (scorePlayer1 > scorePlayer2) {
+ ganador = player1name.value;
+} else if (scorePlayer2 > scorePlayer1) {
+ ganador = player2name.value;
+} else {
+ // En caso de empate
+ ganador = "Empate";
+}
+localStorage.setItem('ganador', ganador); -->

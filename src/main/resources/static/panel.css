@@ -21,7 +21,7 @@
     font-size: 1.3rem;
     text-decoration: none;
     color: white;
-    transition: all 0.25s ease-in-out; /*transici'on al mostrar las secciones*/
+    transition: all 0.25s ease-in-out; 
     }
 
     .menu p{

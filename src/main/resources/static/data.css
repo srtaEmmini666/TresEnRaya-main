@@ -1,0 +1,26 @@
+table{
+    margin: 0 auto;
+    border-collapse: collapse;
+
+}
+
+th{
+    border: solid 3px black;
+    font-size: 30px;
+    padding: 20px;
+}
+
+
+td{
+    border: solid 1px black;
+    padding: 15px;
+}
+
+td.dark{
+    border: solid 1px white;
+    padding: 15px;
+}
+
+.container-cosas-casi-inutiles{
+    position: fixed;
+}

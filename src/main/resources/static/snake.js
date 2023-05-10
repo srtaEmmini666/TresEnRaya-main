@@ -23,6 +23,18 @@ let Yvelocity=0;
 //finish game
 let gameOver=false;
 
+// score snake 1
+let score1=0;
+
+//score snake 2
+let score2=0;
+
+let showScore1= document.getElementById('score1');
+let showScore2 = document.getElementById('score2');
+
+let ganador;
+
+
 // ///////////////
 // snake 2
 let snake2X = blockSize * 5;
@@ -37,6 +49,8 @@ const hardModeButton = document.getElementById("hard-mode-button");
 const buttonPhotos=document.querySelectorAll('#board-container img');
 console.log(buttonPhotos);
 
+//guardar nombre de juego
+const gameName = 'Serpientita'
 
 
 
@@ -71,88 +85,139 @@ window.onload=function () {//hace que la funci'on ya empiece ejecut'andose al ca
 
 }
 
+let partidaGuardada=false;
 
-function update() {//prepara el juego para c'omo debe iniciar, esta es literalmente como la funci'on update de p5js
-    
-    if (gameOver) {
-        return;
-    }
-    //dibujando el board, tablero
-    context.fillStyle='darkblue';//color
-    context.fillRect(0, 0, board.width, board.height);//el punto 0,0 es la posici'on, luego ponemos el ancho y el alto del lienzo, del board
-    //dibujando comida
-    context.fillStyle='red';
-    context.fillRect(foodX, foodY, blockSize, blockSize);//the two first are the posicion, the next are the width and height
-    //dibujando snake
-    context.fillStyle='lime';
-    context.fillRect(snakeX, snakeY, blockSize, blockSize)//estos dos ultimos son el alto y el ancho del cuadrado, mientras que los dos primeros son las cordenadas, por lo que indican la posici'on del cuadrado
-    for (let i = 0; i < snakeBody.length; i++) {//recorremos el cuerpo invisible de la serpiente y lo pintamos
-        context.fillRect(snakeBody[i][0], snakeBody[i][1], blockSize, blockSize);
-    }
-    //condicines para perder
-    if (snakeX<0||snakeX>cols*blockSize||snakeY<0||snakeY>rows*blockSize ) {//si choca con las paredes
-        gameOver=true;
-        alert('Game Over')}
+function update() {
+  //prepara el juego para c'omo debe iniciar, esta es literalmente como la funci'on update de p5js
 
-    // condiciones para perder Snake 2
-    if (snake2X<0||snake2X>cols*blockSize||snake2Y<0||snake2Y>rows*blockSize ) {//si choca con las paredes
-        gameOver=true;
-        alert('Game Over')}
+  if (gameOver) {
+    return;
+  }
+  //dibujando el board, tablero
+  context.fillStyle = "darkblue"; //color
+  context.fillRect(0, 0, board.width, board.height); //el punto 0,0 es la posici'on, luego ponemos el ancho y el alto del lienzo, del board
+  //dibujando comida
+  context.fillStyle = "red";
+  context.fillRect(foodX, foodY, blockSize, blockSize);
+  //dibujando snake
+  context.fillStyle = "lime";
+  context.fillRect(snakeX, snakeY, blockSize, blockSize); //estos dos ultimos son el alto y el ancho del cuadrado, mientras que los dos primeros son las cordenadas, por lo que indican la posici'on del cuadrado
+  for (let i = 0; i < snakeBody.length; i++) {
+    //recorremos el cuerpo invisible de la serpiente y lo pintamos
+    context.fillRect(snakeBody[i][0], snakeBody[i][1], blockSize, blockSize);
+  }
+  //condicines para perder
+  if (
+    snakeX < 0 ||
+    snakeX > cols * blockSize ||
+    snakeY < 0 ||
+    snakeY > rows * blockSize
+  ) {
+    //si choca con las paredes
+    gameOver = true;
+    alert("Game Over");
+  }
 
-            // pintando snake 2
-    context.fillStyle = 'orange';
-    context.fillRect(snake2X, snake2Y, blockSize, blockSize);
-    for (let i = 0; i < snake2Body.length; i++) {
-        context.fillRect(snake2Body[i][0], snake2Body[i][1], blockSize, blockSize);
-    }
+  // condiciones para perder Snake 2
+  if (
+    snake2X < 0 ||
+    snake2X > cols * blockSize ||
+    snake2Y < 0 ||
+    snake2Y > rows * blockSize
+  ) {
+    //si choca con las paredes
+    gameOver = true;
+    alert("Game Over");
+  }
 
-    //     console.log(snakeY);
-    // }
-//hace gameOver al chocarse en s'i misma, pero tambi'en cuando come la comida
-    // for (let i = 0; i < snakeBody.length; i++) {
-    //     if (snakeX==snakeBody[i][0]&&snakeY==snakeBody[i][1]) {
-    //         gameOver=true;
-    //         alert('Game Over, te has mordido a ti misma');
-    //     }
-    // }
+  // pintando snake 2
+  context.fillStyle = "orange";
+  context.fillRect(snake2X, snake2Y, blockSize, blockSize);
+  for (let i = 0; i < snake2Body.length; i++) {
+    context.fillRect(snake2Body[i][0], snake2Body[i][1], blockSize, blockSize);
+  }
 
-    
-    //movimiento
-    snakeX+=Xvelocity*blockSize;//le ponemos la velocidad del tamanio del cuadrado, para que as'i se mueva cuadrado por cuadrado por segundo
-    snakeY+=Yvelocity*blockSize;//por lo que otra forma de aumentar la velocidad ser'ia disminuyendo el n'umero por el que se divien los 1000 en la funci'on setInterval
+  //     console.log(snakeY);
+  // }
+  //hace gameOver al chocarse en s'i misma, pero tambi'en cuando come la comida
+  // for (let i = 0; i < snakeBody.length; i++) {
+  //     if (snakeX==snakeBody[i][0]&&snakeY==snakeBody[i][1]) {
+  //         gameOver=true;
+  //         alert('Game Over, te has mordido a ti misma');
+  //     }
+  // }
 
-    //hacer que la serpiente coma la comida
-    if (snakeX==foodX && snakeY==foodY) {
-        snakeBody.push([foodX, foodY]);//le decimos que al comer, introduzca en el array el cuadrado food, esto crecer'a a la serpiente donde est'e la comida
-        placeFood();
-    }
-    //hacer que el cuerpo crecido siga a la serpiente
-    for (let i = snakeBody.length-1; i > 0; i--) {//le decimos que empiece a moverse por la cola(la 'ultima posici'on) antes de mover las siguientes partes del cuerpo,para que as'i la cola alcance a la cabeza
-        snakeBody[i]=snakeBody[i-1]
-    }
-    if (snakeBody.length) {
-        snakeBody[0]=[snakeX, snakeY];
-    }
-    // manejar el cuerpo de la snake 2
-    for (let i = snake2Body.length-1; i > 0; i--) {//le decimos que empiece a moverse por la cola(la 'ultima posici'on) antes de mover las siguientes partes del cuerpo,para que as'i la cola alcance a la cabeza
-        snake2Body[i]=snake2Body[i-1]
-    }
-    if (snake2Body.length) {
-        snake2Body[0]=[snake2X, snake2Y];
-    }
+  //movimiento
+  snakeX += Xvelocity * blockSize; //le ponemos la velocidad del tamanio del cuadrado, para que as'i se mueva cuadrado por cuadrado por segundo
+  snakeY += Yvelocity * blockSize; //por lo que otra forma de aumentar la velocidad ser'ia disminuyendo el n'umero por el que se divien los 1000 en la funci'on setInterval
 
-    // mover snake 2
-    snake2X += X2velocity * blockSize;
-    snake2Y += Y2velocity * blockSize;
-    // ...
-    // snake 2 come la comida
-    if (snake2X == foodX && snake2Y == foodY) {
-        snake2Body.push([foodX, foodY]);
-        placeFood();
-    }
+  //hacer que la serpiente coma la comida
+  if (snakeX == foodX && snakeY == foodY) {
+    snakeBody.push([foodX, foodY]); //le decimos que al comer, introduzca en el array el cuadrado food, esto crecer'a a la serpiente donde est'e la comida
+    score1++;
+    showScore1.innerHTML = score1;
+    placeFood();
+  }
+  //hacer que el cuerpo crecido siga a la serpiente
+  for (let i = snakeBody.length - 1; i > 0; i--) {
+    //le decimos que empiece a moverse por la cola(la 'ultima posici'on) antes de mover las siguientes partes del cuerpo,para que as'i la cola alcance a la cabeza
+    snakeBody[i] = snakeBody[i - 1];
+  }
+  if (snakeBody.length) {
+    snakeBody[0] = [snakeX, snakeY];
+  }
+  // manejar el cuerpo de la snake 2
+  for (let i = snake2Body.length - 1; i > 0; i--) {
+    //le decimos que empiece a moverse por la cola(la 'ultima posici'on) antes de mover las siguientes partes del cuerpo,para que as'i la cola alcance a la cabeza
+    snake2Body[i] = snake2Body[i - 1];
+  }
+  if (snake2Body.length) {
+    snake2Body[0] = [snake2X, snake2Y];
+  }
 
+  // mover snake 2
+  snake2X += X2velocity * blockSize;
+  snake2Y += Y2velocity * blockSize;
+  // ...
+  // snake 2 come la comida
+  if (snake2X == foodX && snake2Y == foodY) {
+    snake2Body.push([foodX, foodY]);
+    score2++;
+    showScore2.innerHTML = score2;
+    placeFood();
+  }
+//comprobar ganador
+if (gameOver && !partidaGuardada) {
+    if (score1 > score2) {
+        ganador = player1name.value;
+    } else if (score2 > score1) {
+        ganador = player2name.value;
+    } else {
+        ganador = "Empate";
+    }
+    // alert(`Juego terminado. Ganador: ${ganador}`);
+    //guardar el nombre del ganador en el localstorage
+    localStorage.setItem("ganador", ganador);
+    alert(`Juego terminado. Ganador: ${ganador}`);
+
+    //comprobar que se ha guargado
+    let lastWinner = localStorage.getItem("ganador");
+    console.log(`Último ganador: ${lastWinner}`);
+
+    // Guardar información de la partida
+    let partidas = JSON.parse(localStorage.getItem("partidas")) || [];
+    let partida = {
+        gameName: gameName,
+        player1Name: player1name.value,
+        player2Name: player2name.value,
+        winner: ganador
+    };
+    partidas.push(partida);
+    localStorage.setItem("partidas", JSON.stringify(partidas));
+
+    partidaGuardada = true;
 }
-
+}
 
 const btnStart = document.getElementById('start-game-button');
 console.log(btnStart); // Verificar si el elemento existe
@@ -160,6 +225,12 @@ console.log(btnStart); // Verificar si el elemento existe
 const nameInputs =document.getElementById('name-inputs');
 
 const showingNames = ()=>{
+    //guardar juego en el localstorage
+    localStorage.setItem("gameName", gameName);
+    //comprobar
+    let savedGameName = localStorage.getItem("gameName");
+console.log(`Nombre del juego guardado: ${savedGameName}`);
+
     showNames.innerHTML=player1name.value;
     showNames2.innerHTML=player2name.value;
     console.log(player1name.value +","+player2name.value);
@@ -172,10 +243,15 @@ const showingNames = ()=>{
     const gameBoard = document.querySelector("canvas");
     gameBoard.style.visibility = "visible";
 
+
 for (let i = 0; i < buttonPhotos.length; i++) {
     buttonPhotos[i].style.visibility='visible'
     
 }
+
+// document.getElementById('score1').style.visibility='visible';
+//  document.getElementById('score2').style.visibility='visible';
+
 
 }
 
@@ -245,6 +321,14 @@ console.log(showNames);
 
 const showNames2 = document.getElementById('name2');
 console.log(showNames2); 
+
+
+////////////////////////////////////////////////////////////
+
+
+
+
+
 
 
 

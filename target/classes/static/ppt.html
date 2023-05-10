@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="ppt.css">
+    <link rel="stylesheet" href="panel.css">
+  </head>
+  <body>
+
+    <div class="panel-container">
+        <aside class="panel">
+            <br><br><br><br>
+            <div class="container-buttons">
+                <button class="btns" id="btnDarkMode">Modo Oscuro</button>
+                <br><br>
+                <!-- <button  class="btns" id="hard-mode-button">Modo difícil</button> -->
+                <p style="font-size: 10px; color: #fff; white-space: nowrap; position: fixed; left: 5px; padding: 0;" >para este juego solo está disponible el modo solo</p>
+                <button class="btns" id="single-player-mode-button">Modo Solo</button>
+            </div>
+<br>
+            <nav class="menu">
+                <a href="data.html">Historial de partidas</a>
+                <p href="">Otros Juegos</p>
+                <a href="snake.html">Serpientita</a>
+                <a href="index.html">Tres en raya</a>
+                <a href="memory.html">Memoria</a>
+
+
+            </nav>
+          </aside><br>
+          <button type="button" class="boton"></button>
+    </div>
+
+    <div class="container-without-panel">
+    
+        <div id="name-inputs">
+            <label for="player1-name">Jugador 1:</label>
+            <input  class="inputs-text" type="text" id="player1-name" placeholder="Eustaquia.." required>
+            <br>
+            <!-- <label for="player2-name">Jugador 2:</label>
+            <input  class="inputs-text" type="text" id="player2-name" placeholder="Clodomiro.." required>
+            <br> -->
+            <button id="start-game-button">PLAY!</button>
+          
+            <p class="name-game" >Pie, Pap o Tije</p>
+    
+    
+        
+        </div>
+    </div>
+   
+    <div class="container">
+<div id="container-names">
+    <span id="player1">jugador </span>    <span id="ordenador">Ordenador</span>
+</div>
+        <div class="respuestas-container">
+            <!-- <span id="respuesta-usuario"></span>
+            <span id="respuesta-ordenador"></span> -->
+            <img id="eleccionUsuario" src="ppt.gif" alt="" />
+            <img id="eleccionComputadora" src="ppt.gif" alt="" />
+          </div>
+          <p id="resultado"></p>
+ <div class="container-botones">
+    <button id="piedra"></button>
+    <button id="papel"></button>
+    <button id="tijera"></button>
+
+ </div>
+ <div class="reiniciar">
+    <button id="reiniciar" style="display: none;">Reiniciar</button>
+</div>
+    </div>
+<p id="hard-mode-button"></p>     <!-- esto es solo para que no de error el modo oscuro por la ausencia de este id -->
+    <script src="ppt.js"></script>
+    <script src="panel.js"></script>
+    <script src="modoOscuro.js"></script>
+  </body>
+</html>

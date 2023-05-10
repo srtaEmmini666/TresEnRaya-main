@@ -1,7 +1,7 @@
   
   body{
     background-color: #ccefe3;
-    
+    overflow: hidden;
   }
 
   body.dark{
@@ -14,6 +14,7 @@
     font-size: 30px;
   }
 
+  
 .menu a, p{
     padding: 2rem;
     width: inherit;
@@ -21,7 +22,7 @@
     font-size: 1.3rem;
     text-decoration: none;
     color: white;
-    transition: all 0.25s ease-in-out; 
+    transition: all 0.25s ease-in-out; /*transici'on al mostrar las secciones*/
     }
 
     .menu p{
@@ -51,7 +52,10 @@
     height: 100%;
     transform: translate(-110%,0%);/*hace que el menu aparezca de derecha a izq*/
     transition: transform .3s ease;/*hace que lo haga con una transicion, suavemente*/
-    }
+
+}
+
+
 
     .panel.dark{
         position: fixed;
@@ -136,6 +140,7 @@
     /* transition: all .1s; */
 }
 
+
 #name-inputs{
     /* border: solid 1px red; */
     display: flex;
@@ -175,15 +180,6 @@ border-radius: 3px;
     transition: all .1s ease-in;
 }
 
-/* canvas */
-#board{
-    display: flex;
-    justify-content: space-between;
-     width: 550px; /*distancia entre nombre jugadores */
-     height: 550px;
-    margin: 0 auto;
-    margin-top: 0;
-}
 
 .container-buttons{
     display: flex;
@@ -192,12 +188,7 @@ border-radius: 3px;
     max-width: 100px;
     margin: 0 auto;
   }
-/* 
-*{
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-} */
+
 
 
 .container-names{
@@ -208,21 +199,7 @@ border-radius: 3px;
 }
 
 
-#name1{
-    background-color: orange;
-}
-
-#name2{
-    background-color: lime;
-}
-
-td:hover {
-    background-color: rgba(34,34,34, 0.1);
-    box-shadow: 0 0 15px white;
-  }
-
-
-  .name-game{
+.name-game{
     white-space: nowrap;
     display: block;
     animation: escribir 2s 1;
@@ -245,38 +222,3 @@ td:hover {
     @keyframes escribir {
         from{width: 0%}
     }
-
-    #board-container{
-        display: flex;
-    }
-
-    #board-container img{
-        /* display: flex; */
-        visibility: hidden;
-        animation: animar 2s 2;
-        overflow: hidden;
-    }
-
-    @keyframes animar {
-    from{height: 0;}
-    30%, 50%{background: lime;}
-    40%, 70%{background: orange;}
-    50%, 70%{background: black;}
-    60%, 70%{background: red;}
-    70%, 80%{background: yellow;}
-    100%{background: violet;}
-
-    }
-
-
-    #img1{
-        width: 200px;
-        height: 100px;
-    }
-
-    #img2{
-        width: 250px;
-        height: 100px;
-    }
-
-
