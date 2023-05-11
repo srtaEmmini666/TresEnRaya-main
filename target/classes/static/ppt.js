@@ -4,6 +4,8 @@ const inputs = document.getElementById("name-inputs");
 
 //variable que guarda el nombre
 const gameName='Piedra papel tijera';
+const foto = document.getElementById('foto');
+foto.style.display='none';
 
 
 startGameButton.addEventListener("click", () => {
@@ -84,6 +86,12 @@ document.getElementById("tijera").disabled = false;
     if (eleccionUsuario === eleccionComputadora) {
       console.log("Empate");
       resultado.innerHTML = `Empate`;
+      foto.style.display = 'block';
+
+setTimeout(() => {
+  foto.style.display = 'none';
+  foto.src=`empate.gif`;
+}, 2000);
     } else if (
       (eleccionUsuario === "piedra" && eleccionComputadora === "tijera") ||
       (eleccionUsuario === "papel" && eleccionComputadora === "piedra") ||
@@ -91,9 +99,22 @@ document.getElementById("tijera").disabled = false;
     ) {
       console.log("Ganaste");
       resultado.innerHTML = `Ganaste`;
+      foto.style.display = 'block';
+      foto.src=`burguesitahot.gif`;
+
+      setTimeout(() => {
+      foto.style.display='none';
+      }, 2000);
+
     } else {
       console.log("Perdiste");
+      foto.style.display = 'block';
       resultado.innerHTML = `Perdiste`;
+
+setTimeout(() => {
+  foto.style.display = 'none';
+  foto.src=`culito.gif`;
+}, 2000);
     }
 
     if (resultado.innerHTML=='Ganaste') {
