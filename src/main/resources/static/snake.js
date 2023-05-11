@@ -34,6 +34,8 @@ let showScore2 = document.getElementById('score2');
 
 let ganador;
 
+const etiqueta=document.getElementById("etiqueta");
+
 
 // ///////////////
 // snake 2
@@ -115,7 +117,7 @@ function update() {
   ) {
     //si choca con las paredes
     gameOver = true;
-    alert("Game Over");
+    // alert("Game Over");
   }
 
   // condiciones para perder Snake 2
@@ -127,7 +129,7 @@ function update() {
   ) {
     //si choca con las paredes
     gameOver = true;
-    alert("Game Over");
+    // alert("Game Over");
   }
 
   // pintando snake 2
@@ -198,7 +200,33 @@ if (gameOver && !partidaGuardada) {
     // alert(`Juego terminado. Ganador: ${ganador}`);
     //guardar el nombre del ganador en el localstorage
     localStorage.setItem("ganador", ganador);
-    alert(`Juego terminado. Ganador: ${ganador}`);
+    // alert(`Juego terminado. Ganador: ${ganador}`);
+    etiqueta.style.visibility='visible';
+    etiqueta.innerHTML=`Fin de juego, el ganador es ${ganador}`
+
+    //creando bot'on 
+    const button = document.createElement('button');
+    const buttonReload = document.createElement('button');
+    button.textContent = 'Restart';
+    buttonReload.textContent = 'Salir';
+    const container = document.getElementById('etiqueta');
+    const buttonContainer = document.createElement('div');
+    buttonContainer.style.display = 'flex';
+    buttonContainer.style.flexDirection = 'row';
+    buttonContainer.appendChild(button);
+    buttonContainer.appendChild(buttonReload);
+    container.appendChild(buttonContainer);
+    
+
+button.addEventListener('click', ()=>{resetGame(); etiqueta.style.visibility='hidden'})
+buttonReload.addEventListener('click', ()=>{location.reload()})
+
+//  setTimeout(() => {
+//   etiqueta.style.visibility='hidden';
+//   // Crear button
+
+//   // resetGame(); //reinicia el tablero
+//  }, 3000);
 
     //comprobar que se ha guargado
     let lastWinner = localStorage.getItem("ganador");
@@ -219,41 +247,76 @@ if (gameOver && !partidaGuardada) {
 }
 }
 
+
+
+
+
+function resetGame() {
+  // Reiniciar las variables del juego
+  snakeX = blockSize * 5;
+  snakeY = blockSize * 5;
+  snakeBody = [1];
+  snakeBody.push([snakeX - blockSize, snakeY]);
+  foodX = undefined;
+  foodY = undefined;
+  Xvelocity = 0;
+  Yvelocity = 0;
+  gameOver = false;
+  score1 = 0;
+  score2 = 0;
+  showScore1.innerHTML = score1;
+  showScore2.innerHTML = score2;
+  ganador = undefined;
+  
+  // Reiniciar las variables de la serpiente 2
+  snake2X = blockSize * 5;
+  snake2Y = blockSize * 5;
+  snake2Body = [1];
+  X2velocity = 0;
+  Y2velocity = 0;
+
+  // Colocar la comida en una nueva posición
+  placeFood();
+
+  // Reiniciar la variable partidaGuardada(sino no muestra el mensaje en la segunda partida)
+  partidaGuardada = false;
+}
+
+
+
+
 const btnStart = document.getElementById('start-game-button');
 console.log(btnStart); // Verificar si el elemento existe
 
 const nameInputs =document.getElementById('name-inputs');
 
-const showingNames = ()=>{
+const showingNames = () => {
+  if (player1name.value === "" || player2name.value === "") {
+    alert("Ingresa ambos nombres antes de jugar, perr@.");
+  } else {
     //guardar juego en el localstorage
     localStorage.setItem("gameName", gameName);
     //comprobar
     let savedGameName = localStorage.getItem("gameName");
-console.log(`Nombre del juego guardado: ${savedGameName}`);
+    console.log(`Nombre del juego guardado: ${savedGameName}`);
 
-    showNames.innerHTML=player1name.value;
-    showNames2.innerHTML=player2name.value;
-    console.log(player1name.value +","+player2name.value);
+    showNames.innerHTML = player1name.value;
+    showNames2.innerHTML = player2name.value;
+    console.log(player1name.value + "," + player2name.value);
 
-      // Ocultar los campos de entrada de texto
-//   const nameInputs = document.getElementById("name-inputs");
-  nameInputs.style.display = "none";
+    // Ocultar los campos de entrada de texto
+    nameInputs.style.display = "none";
 
-      // Mostrar el tablero del juego
+    // Mostrar el tablero del juego
     const gameBoard = document.querySelector("canvas");
     gameBoard.style.visibility = "visible";
 
-
-for (let i = 0; i < buttonPhotos.length; i++) {
-    buttonPhotos[i].style.visibility='visible'
-    
+    for (let i = 0; i < buttonPhotos.length; i++) {
+      buttonPhotos[i].style.visibility = "visible";
+    }
+  }
 }
 
-// document.getElementById('score1').style.visibility='visible';
-//  document.getElementById('score2').style.visibility='visible';
-
-
-}
 
 btnStart.addEventListener('click', showingNames);
 let isButtonClicked=false;

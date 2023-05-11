@@ -215,17 +215,23 @@ function reload() {
     const nameInputs = document.getElementById('name-inputs');
     
     const showingNames = () => {
-    showNames.innerHTML = player1name.value;
-    showNames2.innerHTML = player2name.value;
-    
-    localStorage.setItem('player1Name', player1name.value);
-    localStorage.setItem('player2Name', player2name.value);
-    
-    nameInputs.style.display = "none";
-    
-    const gameBoard = document.querySelector("#container");
-    gameBoard.style.visibility = "visible";
-    }
+        if (player1name.value === "" || player2name.value === "") {
+          alert("Ingresa ambos nombres antes de jugar, perr@.");
+        } else {
+          //mostrar los nombres del input
+          showNames.innerHTML = player1name.value;
+          showNames2.innerHTML = player2name.value;
+          //guardar nombres
+          localStorage.setItem('player1Name', player1name.value);
+          localStorage.setItem('player2Name', player2name.value);
+          //cabecera inputs
+          nameInputs.style.display = "none";
+          // tablero
+          const gameBoard = document.querySelector("#container");
+          gameBoard.style.visibility = "visible";
+        }
+      }
+      
     
     btnStart.addEventListener('click', showingNames);
     let isButtonClicked = false;
@@ -251,7 +257,7 @@ function reload() {
     }
 
 
-    
+    //parte del dinero
 const body_ = document.querySelector('body');
 let time=2;
 

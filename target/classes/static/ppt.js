@@ -8,20 +8,27 @@ const gameName='Piedra papel tijera';
 
 startGameButton.addEventListener("click", () => {
   const player1Name = document.getElementById("player1-name").value;
-  localStorage.setItem("player1Name", player1Name);
-  console.log("click");
-  inputs.style.display = "none";
-  container.style.visibility = "visible";
-  initGame();
+  if (player1Name === "") {
+    alert("Ingresa tu nombre antes de jugar, perr@");
+  } else {
+    localStorage.setItem("player1Name", player1Name);
+    console.log("click");
+    inputs.style.display = "none";
+    container.style.visibility = "visible";
+    initGame();
 
-   //guardando el nombre del juego en el localstorage
- localStorage.setItem("gameName", gameName);
+    //guardando el nombre del juego en el localstorage
+    localStorage.setItem("gameName", gameName);
 
- //comprobar que se ha guardado correctamente
- const storedValue = localStorage.getItem("gameName");
+    //comprobar que se ha guardado correctamente
+    const storedValue = localStorage.getItem("gameName");
 
-console.log(storedValue, gameName); 
+    console.log(storedValue, gameName);
+  }
 });
+
+
+
 
 function initGame() {
   const player1Name = document.getElementById("player1-name").value;

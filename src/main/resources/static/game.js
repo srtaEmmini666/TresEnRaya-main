@@ -4,21 +4,24 @@ const startGameButton = document.getElementById("start-game-button");
 const gameName='tres en raya';
 
 startGameButton.addEventListener("click", () => {
- const player1Name = document.getElementById("player1-name").value;
- const player2Name = document.getElementById("player2-name").value;
- localStorage.setItem("player1Name", player1Name);
- localStorage.setItem("player2Name", player2Name);
- initGame();
- //guardando el nombre del juego en el localstorage
- localStorage.setItem("gameName", gameName);
+  const player1Name = document.getElementById("player1-name").value;
+  const player2Name = document.getElementById("player2-name").value;
+  if (player1Name === "" || player2Name === "") {
+    alert("Ingresa ambos nombres antes de jugar, perr@");
+  } else {
+    localStorage.setItem("player1Name", player1Name);
+    localStorage.setItem("player2Name", player2Name);
+    initGame();
+    //guardando el nombre del juego en el localstorage
+    localStorage.setItem("gameName", gameName);
 
- //comprobar que se ha guardado correctamente
- const storedValue = localStorage.getItem("gameName");
+    //comprobar que se ha guardado correctamente
+    const storedValue = localStorage.getItem("gameName");
 
-console.log(storedValue, gameName); 
-
-
+    console.log(storedValue, gameName);
+  }
 });
+
 
 // variables para el cron'ometro
 let turnTimeLeft = 3;
@@ -63,6 +66,34 @@ singlePlayerModeButton_.addEventListener("click", () => {
  player2Label.style.display = "block";
  }
 });
+
+//número de partidas
+let num_partidas = 0;
+console.log(num_partidas);
+//Variable que guarda el botón pulsado de las partidas
+let boton_partida;
+let boton_uno = document.getElementById("una_partida");
+let boton_tres = document.getElementById("tres_partidas");
+let boton_cinco = document.getElementById("cinco_partidas");
+
+boton_uno.addEventListener("click", function(){
+  boton_uno.innerText
+  boton_partida = boton_uno.innerText;
+  console.log(boton_partida)
+})
+boton_tres.addEventListener("click", function(){
+  boton_tres.innerText
+  boton_partida = boton_tres.innerText;
+  console.log(boton_partida)
+})
+boton_cinco.addEventListener("click", function(){
+  boton_cinco.innerText
+  boton_partida = boton_cinco.innerText;
+  console.log(boton_partida)
+})
+
+//variable etiqueta
+let winner_message = document.getElementById("etiqueta")
 
 
 
@@ -320,15 +351,37 @@ partidas.push(partida);
 localStorage.setItem('partidas',JSON.stringify(partidas));
 /////////////////////////
 setTimeout(()=>{
-alert(`${winnerName} ha ganado!`);
+// alert(`${winnerName} ha ganado!`);
+winner_message.innerHTML= "Ha ganado" + winnerName;
+winner_message.style.visibility="visible";
+setTimeout(() => {
+winner_message.innerHTML= "" ;
+winner_message.style.visibility="hidden";
+}, 2000);
 
+num_partidas ++;
+console.log(num_partidas);
+/*location.reload(); Hay que eliminar esta función reservada porque no queremos que se recargue la página
+*/
+if (num_partidas == 3 && boton_partida == "3 partidas") {
+  location.reload();
+} else if(num_partidas == 1 && boton_partida == "1 partida") {
+ setTimeout(() => {
+  location.reload(); 
+ }, 2000);
+}else if(num_partidas == 5 && boton_partida == "5 partidas"){
 location.reload();
-
+}
+initGame()
 
 },500);
 
 isGameOver=true;
 }
+
+
+
+
 
 function checkDraw(){
 let isDraw=true;
@@ -342,8 +395,8 @@ if(isDraw){
 setTimeout(()=>{
 alert("Empate");
 
-location.reload();
-
+// location.reload();
+initGame();
 
 },500);
 isGameOver=true;
