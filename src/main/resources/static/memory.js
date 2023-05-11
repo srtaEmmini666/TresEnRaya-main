@@ -215,7 +215,7 @@ function reload() {
     const nameInputs = document.getElementById('name-inputs');
     
     const showingNames = () => {
-        if (player1name.value === "" || player2name.value === "") {
+        if (player1name.value === "") {
           alert("Ingresa ambos nombres antes de jugar, perr@.");
         } else {
           //mostrar los nombres del input
@@ -238,23 +238,32 @@ function reload() {
     
     const gameName = 'Memoria';
     
+    let isSingleMode = false;
     const singleModeButton = document.getElementById('single-player-mode-button');
     singleModeButton.addEventListener('click', startSingleMode);
     
     function startSingleMode() {
-    localStorage.setItem("gameName", gameName);
-    
-    player2name.style.display = "none";
-    document.querySelector('label[for="player2-name"]').style.display = "none";
-    singleModeButton.textContent = "Modo pareja";
-    
-    document.getElementById("puntuacion-jugador-2").style.display = "none";
-    document.getElementById("puntuacion-jugador-1").style.display = "none";
-    
-    document.getElementById("name1").style.borderBottom='none';
-    
-    jugadorActual = 1;
+      isSingleMode = !isSingleMode;
+      if (isSingleMode) {
+        // Activar el modo de un solo jugador
+        localStorage.setItem("gameName", gameName);
+        player2name.style.display = "none";
+        document.querySelector('label[for="player2-name"]').style.display = "none";
+        singleModeButton.textContent = "Desactivar Modo solo";
+        document.getElementById("puntuacion-jugador-2").style.display = "none";
+        document.getElementById("puntuacion-jugador-1").style.display = "none";
+        document.getElementById("name1").style.borderBottom='none';
+        jugadorActual = 1;
+      } else {
+        // Desactivar el modo de un solo jugador
+        player2name.style.display = "block";
+        document.querySelector('label[for="player2-name"]').style.display = "block";
+        singleModeButton.textContent = "Modo Solo";
+        document.getElementById("puntuacion-jugador-2").style.display = "block";
+        document.getElementById("puntuacion-jugador-1").style.display = "block";
+      }
     }
+    
 
 
     //parte del dinero

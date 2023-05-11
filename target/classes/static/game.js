@@ -4,9 +4,15 @@ const startGameButton = document.getElementById("start-game-button");
 const gameName='tres en raya';
 
 startGameButton.addEventListener("click", () => {
+  if (!isNumPartidasSelected) {
+    alert("Selecciona el número de partidas antes de jugar");
+    return;
+    }
+
+
   const player1Name = document.getElementById("player1-name").value;
   const player2Name = document.getElementById("player2-name").value;
-  if (player1Name === "" || player2Name === "") {
+  if (player1Name === "") {
     alert("Ingresa ambos nombres antes de jugar, perr@");
   } else {
     localStorage.setItem("player1Name", player1Name);
@@ -38,12 +44,18 @@ let isSinglePlayerMode = false;
 let scorePlayer1=0;
 let scorePlayer2=0;
 
+let score1=document.getElementById('score1');
+let score2=document.getElementById('score2');
+
 
 //ganador almacenado en el localstorage
 let ganador; 
 
 // variable para indicar si el juego ha terminado
 let isGameOver = false;
+
+const pinita= document.getElementById('fotito');
+
 
 
 
@@ -76,21 +88,27 @@ let boton_uno = document.getElementById("una_partida");
 let boton_tres = document.getElementById("tres_partidas");
 let boton_cinco = document.getElementById("cinco_partidas");
 
+let isNumPartidasSelected = false;
+
 boton_uno.addEventListener("click", function(){
-  boton_uno.innerText
-  boton_partida = boton_uno.innerText;
-  console.log(boton_partida)
+ boton_uno.innerText
+ boton_partida = boton_uno.innerText;
+ console.log(boton_partida)
+ isNumPartidasSelected = true;
 })
 boton_tres.addEventListener("click", function(){
-  boton_tres.innerText
-  boton_partida = boton_tres.innerText;
-  console.log(boton_partida)
+ boton_tres.innerText
+ boton_partida = boton_tres.innerText;
+ console.log(boton_partida)
+ isNumPartidasSelected = true;
 })
 boton_cinco.addEventListener("click", function(){
-  boton_cinco.innerText
-  boton_partida = boton_cinco.innerText;
-  console.log(boton_partida)
+ boton_cinco.innerText
+ boton_partida = boton_cinco.innerText;
+ console.log(boton_partida)
+ isNumPartidasSelected = true;
 })
+
 
 //variable etiqueta
 let winner_message = document.getElementById("etiqueta")
@@ -98,6 +116,12 @@ let winner_message = document.getElementById("etiqueta")
 
 
 function initGame() {
+  console.log('se está ejecutando la función initGame')
+
+  // score1 y score2
+ score1.style.visibility = 'visible';
+ score2.style.visibility = 'visible';
+
   // controlador de eventos para el bot'on de modo difícil
   const hardModeButton = document.getElementById("hard-mode-button");
   hardModeButton.addEventListener("click", () => {
@@ -300,84 +324,128 @@ function checkWin(){
   }
   
   function showWinningCombination(){
-  winningCombination.forEach((cellIndex)=>{
-  cells[cellIndex].classList.add('winner');
-  });
-  
-  const winner=cells[winningCombination[0]].textContent;
-  const winnerName=winner==="X"?localStorage.getItem('player1Name'):localStorage.getItem('player2Name');
-  
-  if(winner==="X"){
-  scorePlayer1++;
-  console.log('score jugador 1: '+scorePlayer1)
-  }else{
-  scorePlayer2++;
-  console.log('score jugador 2: '+scorePlayer2)
-  }
-  
-  
-  localStorage.setItem('scorePlayer1',scorePlayer1);
-  localStorage.setItem('scorePlayer2',scorePlayer2);
-  
-  const storedScorePlayer1=localStorage.getItem('scorePlayer1');
-  const storedScorePlayer2=localStorage.getItem('scorePlayer2');
-  
-  console.log(storedScorePlayer1,scorePlayer1); 
-  console.log(storedScorePlayer2,scorePlayer2);
-  
-  
-  if(scorePlayer1>scorePlayer2){
-  ganador=localStorage.getItem('player1Name');
-}else{
-ganador=localStorage.getItem('player2Name');
-}
-///////////////////
-localStorage.setItem('ganador',ganador);
+    winningCombination.forEach((cellIndex)=>{
+    cells[cellIndex].classList.add('winner');
+    });
+    
+    const winner=cells[winningCombination[0]].textContent;
+    const winnerName=winner==="X"?localStorage.getItem('player1Name'):localStorage.getItem('player2Name');
+    
+    if(winner==="X"){
+    scorePlayer1++;
+    console.log('score jugador 1: '+scorePlayer1)
+    score1.innerHTML=`${scorePlayer1}`
+    }else{
+    scorePlayer2++;
+    console.log('score jugador 2: '+scorePlayer2)
+    score2.innerHTML=`${scorePlayer2}`
+    }
+    
+    
+    localStorage.setItem('scorePlayer1',scorePlayer1);
+    localStorage.setItem('scorePlayer2',scorePlayer2);
+    
+    const storedScorePlayer1=localStorage.getItem('scorePlayer1');
+    const storedScorePlayer2=localStorage.getItem('scorePlayer2');
+    
+    console.log(storedScorePlayer1,scorePlayer1); 
+    console.log(storedScorePlayer2,scorePlayer2);
+    
+    
+    if(scorePlayer1>scorePlayer2){
+    ganador=localStorage.getItem('player1Name');
+   }else{
+   ganador=localStorage.getItem('player2Name');
+   }
+   ///////////////////
+   localStorage.setItem('ganador',ganador);
+   
+   const storedWinner=localStorage.getItem('ganador');
+   
+   console.log(storedWinner,ganador); 
+   let partidas=JSON.parse(localStorage.getItem('partidas'))||[];
+   
+   let partida={
+   gameName:gameName,
+   player1Name:localStorage.getItem('player1Name'),
+   player2Name:localStorage.getItem('player2Name'),
+   winner:ganador
+   };
+   
+   partidas.push(partida);
+   
+   localStorage.setItem('partidas',JSON.stringify(partidas));
+   /////////////////////////
+   setTimeout(()=>{
+    if (!((num_partidas == 2 && boton_partida == "3 partidas") || (num_partidas == 0 && boton_partida == "1 partida") || (num_partidas == 4 && boton_partida == "5 partidas"))) {
+    winner_message.innerHTML= `Ha ganado ${winnerName} <br> <b>Round:</b> ${num_partidas+2}`;
+    winner_message.style.visibility="visible";
+    setTimeout(() => {
 
-const storedWinner=localStorage.getItem('ganador');
+    winner_message.innerHTML= "" ;
+    winner_message.style.visibility="hidden";
+    }, 2000);
+    }
+    
+    num_partidas ++;
+    console.log(num_partidas);
+    
+    if ((num_partidas == 3 && boton_partida == "3 partidas") || (num_partidas == 1 && boton_partida == "1 partida") || (num_partidas == 5 && boton_partida == "5 partidas")) {
+    let realWinner;
+    if (scorePlayer1 > scorePlayer2) {
+    realWinner = localStorage.getItem('player1Name');
+    } else if (scorePlayer2 > scorePlayer1) {
+    realWinner = localStorage.getItem('player2Name');
+    } else {
+    realWinner = 'Empate'; //c zupone q nunca debe aber empate, pero por siacaso
+    }
+    console.log(`Ganador real: ${realWinner}`);
 
-console.log(storedWinner,ganador); 
-let partidas=JSON.parse(localStorage.getItem('partidas'))||[];
 
-let partida={
-gameName:gameName,
-player1Name:localStorage.getItem('player1Name'),
-player2Name:localStorage.getItem('player2Name'),
-winner:ganador
-};
+    winner_message.style.visibility='visible';
+    winner_message.innerHTML=`El ganador final es ${realWinner}`;
+    pinita.style.visibility='visible';
 
-partidas.push(partida);
+              //creando bot'on 
+              const button = document.createElement('button');
+              const buttonReload = document.createElement('button');
+              button.textContent = 'Revancha';
+              buttonReload.textContent = 'Salir';
+              const container = document.getElementById('etiqueta');
+              const buttonContainer = document.createElement('div');
+              buttonContainer.style.display = 'flex';
+              buttonContainer.style.flexDirection = 'row';
+              buttonContainer.appendChild(button);
+              buttonContainer.appendChild(buttonReload);
+              container.appendChild(buttonContainer);
 
-localStorage.setItem('partidas',JSON.stringify(partidas));
-/////////////////////////
-setTimeout(()=>{
-// alert(`${winnerName} ha ganado!`);
-winner_message.innerHTML= "Ha ganado" + winnerName;
-winner_message.style.visibility="visible";
-setTimeout(() => {
-winner_message.innerHTML= "" ;
-winner_message.style.visibility="hidden";
-}, 2000);
-
-num_partidas ++;
-console.log(num_partidas);
-/*location.reload(); Hay que eliminar esta función reservada porque no queremos que se recargue la página
-*/
-if (num_partidas == 3 && boton_partida == "3 partidas") {
+              // Agregando controladores de eventos a los botones
+button.addEventListener('click', () => {
+  console.log('click revancha');
+  num_partidas=0;
+  console.log(`numero de partidas actual: ${num_partidas}`)
+  scorePlayer1=0;
+  scorePlayer2=0;
+  score1.innerHTML=scorePlayer1;
+  score2.innerHTML=scorePlayer2;
+  initGame();
+  winner_message.style.visibility='hidden';
+  pinita.style.visibility='hidden';
+ });
+ 
+ buttonReload.addEventListener('click', () => {
   location.reload();
-} else if(num_partidas == 1 && boton_partida == "1 partida") {
- setTimeout(() => {
-  location.reload(); 
- }, 2000);
-}else if(num_partidas == 5 && boton_partida == "5 partidas"){
-location.reload();
-}
-initGame()
-
-},500);
-
-isGameOver=true;
-}
+ });
+    }
+    
+   initGame()
+   
+   },500);
+   
+   isGameOver=true;
+   }
+   
+   
 
 
 
@@ -394,6 +462,7 @@ isDraw=false;
 if(isDraw){
 setTimeout(()=>{
 alert("Empate");
+winner_message.innerHTML='Empate';
 
 // location.reload();
 initGame();

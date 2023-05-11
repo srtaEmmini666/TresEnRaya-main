@@ -340,5 +340,15 @@ td:hover {
         margin-left: 10px;
       }
 
+      #fotito{
+              
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -130%);
+        visibility: hidden;
+        z-index: 100;
+      }
+
 
 

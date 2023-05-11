@@ -54,6 +54,14 @@ console.log(buttonPhotos);
 //guardar nombre de juego
 const gameName = 'Serpientita'
 
+//modo solo
+let isSingleMode = false;
+const singleModeButton = document.getElementById("single-player-mode-button");
+singleModeButton.addEventListener("click", () => {
+  isSingleMode = !isSingleMode;
+  singleModeButton.textContent = isSingleMode ? "Desactivar Modo Solo" : "Modo Solo";
+});
+
 
 
 //esto es lo equivalente a la funci'on draw en p5js
@@ -132,12 +140,24 @@ function update() {
     // alert("Game Over");
   }
 
-  // pintando snake 2
-  context.fillStyle = "orange";
-  context.fillRect(snake2X, snake2Y, blockSize, blockSize);
-  for (let i = 0; i < snake2Body.length; i++) {
-    context.fillRect(snake2Body[i][0], snake2Body[i][1], blockSize, blockSize);
-  }
+  if (!isSingleMode) {
+    // Dibujar y mover la segunda serpiente
+    let player1Label = document.querySelector("label[for='player1-name']").style.display='block';
+    player1name.style.display='block';
+
+    context.fillStyle = "orange";
+    context.fillRect(snake2X, snake2Y, blockSize, blockSize);
+    for (let i = 0; i < snake2Body.length; i++) {
+      context.fillRect(snake2Body[i][0], snake2Body[i][1], blockSize, blockSize);
+    }}else{
+      let player1Label = document.querySelector("label[for='player1-name']").style.display='none';
+      player1name.style.display='none';
+
+      showScore1.style.display='none';
+      showScore2.style.display='none';
+
+    }
+
 
   //     console.log(snakeY);
   // }
@@ -291,7 +311,7 @@ console.log(btnStart); // Verificar si el elemento existe
 const nameInputs =document.getElementById('name-inputs');
 
 const showingNames = () => {
-  if (player1name.value === "" || player2name.value === "") {
+  if (player2name.value === "") {
     alert("Ingresa ambos nombres antes de jugar, perr@.");
   } else {
     //guardar juego en el localstorage
@@ -386,7 +406,6 @@ const showNames2 = document.getElementById('name2');
 console.log(showNames2); 
 
 
-////////////////////////////////////////////////////////////
 
 
 
